@@ -24,16 +24,64 @@ class Login:
         else:
             return "Login successful"
     
+class ListNode:
+    def __init__(self,data,next=None):
+        self.data = data
+        self.next = next
+
+def Train_Compartment(head):
+    for i in range(1, 11):
+        compartment = ListNode([[0]*10 for j in range(1,11)])
+        # print(compartment.data)
+        
+        if i == 1:
+            head = compartment
+        else:
+            current = head
+            while current.next:
+                current = current.next
+            current.next = compartment
+    return head
+
+def list_compartments(head):
+    current = head
+    compartment_number = 1
+    while current:
+        for i in range(len(current.data)):
+            for j in range(len(current.data[i])):
+                print(current.data[i][j], end=' ')
+            print()
+        current = current.next
+        print(f"---------------")
+        compartment_number += 1
+    
+
+head = None
+head = Train_Compartment(head)
+list_compartments(head)
 
 def main():
+    
     while True:
-        choice = input("Choose an option: 1. Register 2. Login 3. Exit: ")
+        choice = input("Welcome to the User Management System"
+        "\nPlease select an option:\n"
+        "1. Register\n"
+        "2. Login\n"
+        "3. Exit\n"
+        "Choose an option: ")
+
         if choice == '1':
             name = input("Enter your name: ")
             email = input("Enter your email: ")
             password = input("Enter your password: ")
             user = Register(name, email, password)
             print(user.register())
+            if user.register() == "Registration successful":
+                print(f"Welcome {name}!")
+            
+
+
+      
         elif choice == '2':
             email = input("Enter your email: ")
             password = input("Enter your password: ")
